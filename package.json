@@ -1,0 +1,24 @@
+{
+  "name": "nonagrid",
+  "productName": "NonaGrid",
+  "version": "1.0.0",
+  "description": "Grid photo viewer and organizer for photo editing",
+  "main": "main.js",
+  "scripts": {
+	"start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattjmelnick/NonaGrid.git"
+  },
+  "author": "Matt Melnick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattjmelnick/NonaGrid/issues"
+  },
+  "homepage": "https://github.com/mattjmelnick/NonaGrid#readme",
+  "devDependencies": {
+    "electron": "^28.1.3"
+  }
+}
