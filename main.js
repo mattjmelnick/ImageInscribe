@@ -1,5 +1,5 @@
 const path = require("path");
-const { app, BrowserWindow, screen, Menu } = require("electron");
+const { app, BrowserWindow, screen, Menu, ipcMain, dialog } = require("electron");
 
 const createWindow = () => {
 	// Detect if there is an external display
@@ -14,16 +14,22 @@ const createWindow = () => {
 		win = new BrowserWindow({
 			x: externalDisplay.bounds.x + 300,
 			y: externalDisplay.bounds.y + 150,
-			title: "NonaGrid",
 			width: 1300,
-			height: 800
+			height: 800,
+			webPreferences: {
+				nodeIntegration: true,
+				contextIsolation: false
+			}
 		});
 	} else {
 		// Create window on default display
 		win = new BrowserWindow({
-			title: "Nonagrid",
 			width: 1300,
-			height: 800
+			height: 800,
+			webPreferences: {
+				nodeIntegration: true,
+				contextIsolation: false
+			}
 		});
 	}
 	win.loadFile(path.join(__dirname, "./renderer/index.html"));
@@ -63,4 +69,17 @@ app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") {
 		app.quit();
 	}
+});
+
+// Prompt for a directory when clicking the button
+ipcMain.on("open-folder-dialog", (event) => {
+	dialog.showOpenDialog({
+		properties: ["openDirectory"]
+	}).then(result => {
+		if (!result.canceled) {
+			event.sender.send("selected-directory", result.filePaths[0]);
+		}
+	}).catch(err => {
+		console.log(err);
+	})
 });
