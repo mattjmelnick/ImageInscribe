@@ -13,9 +13,9 @@ const createWindow = () => {
 	// Create window on external display
 	if (externalDisplay) {
 		win = new BrowserWindow({
-			x: externalDisplay.bounds.x + 300,
-			y: externalDisplay.bounds.y + 150,
-			width: 1300,
+			x: externalDisplay.bounds.x + (externalDisplay.bounds.width / 2) - 200,
+			y: externalDisplay.bounds.y + (externalDisplay.bounds.height / 2) - 400,
+			width: 400,
 			height: 800,
 			webPreferences: {
 				nodeIntegration: false,
@@ -26,7 +26,7 @@ const createWindow = () => {
 	} else {
 		// Create window on default display
 		win = new BrowserWindow({
-			width: 1300,
+			width: 400,
 			height: 800,
 			webPreferences: {
 				nodeIntegration: false,
@@ -82,7 +82,7 @@ function getImagesInPath(path) {
 				console.error("An error occurred:", err);
 				reject(err);
 			} else {
-				const imageExtensions = [".jpeg", ".jpg", ".png", ".svg", ".tiff", ".raw", ".rw2"];
+				const imageExtensions = [".jpeg", ".jpg", ".JPG", ".JPEG", ".png", ".svg", ".tiff", ".raw", ".rw2"];
 				const imageFiles = files.filter(filename => {
 					const extension = filename.slice(filename.lastIndexOf("."));
 					return imageExtensions.includes(extension);
@@ -100,6 +100,6 @@ ipcMain.handle("open-folder-dialog", async (event) => {
 	});
 	let path = folder.filePaths[0];
 	let listOfImages = await getImagesInPath(path);
+	listOfImages.unshift(path);
 	return listOfImages;
-	// filter using function in renderer to get a new array of images to return to renderer
 });
