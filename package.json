@@ -1,8 +1,8 @@
 {
-  "name": "nonagrid",
-  "productName": "NonaGrid",
+  "name": "imginscribe",
+  "productName": "imgInscribe",
   "version": "1.0.0",
-  "description": "Grid photo viewer and organizer for photo editing",
+  "description": "Application for taking notes about images, photos, and pictures",
   "main": "main.js",
   "scripts": {
 	"start": "electron .",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattjmelnick/NonaGrid.git"
+    "url": "git+https://github.com/mattjmelnick/imgInscribe.git"
   },
   "author": "Matt Melnick",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mattjmelnick/NonaGrid/issues"
+    "url": "https://github.com/mattjmelnick/imgInscribe/issues"
   },
-  "homepage": "https://github.com/mattjmelnick/NonaGrid#readme",
+  "homepage": "https://github.com/mattjmelnick/imgInscribe#readme",
   "devDependencies": {
     "electron": "^28.1.3"
   }
