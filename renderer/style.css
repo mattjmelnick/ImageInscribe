@@ -1,0 +1,70 @@
+body {
+	background-color: #eeeeee;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+.upper-display-area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	height: 10rem;
+	width: 85vw;
+}
+
+.path-output {
+	border: 2px solid black;
+	margin-top: 5px;
+	height: 4rem;
+	width: 100%;
+	font-size: 18px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	word-wrap: break-word;
+	text-align: center;
+	overflow: auto;
+}
+
+span {
+	margin: auto 0;
+}
+
+.get-folder-button, .deleted-items-button {
+	height: 3rem;
+	width: 10rem;
+	background-color: #ece8d9;
+	font-size: 18px;
+}
+
+.lower-display-area {
+	height: calc(100vh - 11rem);
+	width: 85vw;
+	border: 2px solid black;
+}
+
+.number-edit-section {
+	height: 3rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px;
+}
+
+.number-of-images {
+	font-size: 18px;
+}
+
+.edit-button {
+	height: 3rem;
+	width: 3rem;
+	background-color: #ece8d9;
+	font-size: 18px;
+}
