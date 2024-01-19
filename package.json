@@ -1,6 +1,6 @@
 {
-  "name": "imginscribe",
-  "productName": "imgInscribe",
+  "name": "imageinscribe",
+  "productName": "ImageInscribe",
   "version": "1.0.0",
   "description": "Application for taking notes about images, photos, and pictures",
   "main": "main.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattjmelnick/imgInscribe.git"
+    "url": "git+https://github.com/mattjmelnick/ImageInscribe.git"
   },
   "author": "Matt Melnick",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mattjmelnick/imgInscribe/issues"
+    "url": "https://github.com/mattjmelnick/ImageInscribe/issues"
   },
-  "homepage": "https://github.com/mattjmelnick/imgInscribe#readme",
+  "homepage": "https://github.com/mattjmelnick/ImageInscribe#readme",
   "devDependencies": {
     "electron": "^28.1.3"
   }
