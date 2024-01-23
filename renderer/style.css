@@ -97,3 +97,52 @@ button:active {
 	align-items: center;
 	padding-left: 5px;
 }
+
+.textbox-wrapper {
+	display: none;
+	box-sizing: border-box;
+	position: absolute;
+	background-color: #f1ddbd;
+	margin-top: 10px;
+	padding: 5px;
+	border: 2px solid black;
+	width: calc(85vw - 4px);
+	height: 30rem;
+}
+
+.upper-textbox-area {
+	display: flex;
+	height: 3rem;
+	width: 100%;
+	justify-content: space-between;
+	padding-right: 10px;
+}
+
+.textbox-title {
+	display: flex;
+	align-items: center;
+	height: 2rem;
+	width: 80%;
+}
+
+.close-button {
+	height: 2rem;
+	width: 2rem;
+}
+
+.lower-textbox-area {
+	display: flex;
+	justify-content: space-between;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 10rem;
+	width: 100%;
+}
+
+.textbox {
+	resize: none;
+	background-color: white;
+	margin-top: 20px;
+	font-size: 18px;
+	font-family: Helvetica, Arial, sans-serif;
+}
