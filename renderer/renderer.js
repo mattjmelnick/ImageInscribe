@@ -3,39 +3,48 @@ let pathOutput = document.querySelector(".path-output");
 let numberOfImages = document.querySelector(".number-of-images");
 let imageFileSection = document.querySelector(".image-file-section");
 let imageArray = [];
+let textAreaArray = [];
+let currentFolder;
 
-// Send choice to main process to get path
-getFolderButton.addEventListener("click", async () => {
-	const listOfImages = await window.api.selectFolder();
-	// Clear display area
+// Clear display area
+function clearDisplayArea() {
 	if (imageFileSection.hasChildNodes) {
 		while (imageFileSection.firstChild) {
 			imageFileSection.removeChild(imageFileSection.firstChild);
 		}
 	}
-	// Get path from first index
-	let folderPath = listOfImages.shift();
+}
+
+// Update path
+function updatePath(folderPath) {
 	// Allow for word breaks at "/"
 	folderPath = folderPath.replaceAll("/", "/<wbr>");
-	pathOutput.innerHTML = "";
 	// Wrap in span to adjust for path length
 	pathOutput.innerHTML = "<span>" + folderPath + "<span>";
-	numberOfImages.textContent = listOfImages.length + " Images";
-	// Create image file sections for each element
+}
+
+// Save text area content
+function saveTextAreaContent(name, text) {
+	textAreaArray.push({ name: name, text: text });
+}
+
+function updateTextAreaArray() {
+	textAreaArray = [];
+	console.log(textAreaArray);
+}
+
+// Create image file div sections
+function createImageFileSections(listOfImages) {
 	for (let i = 0; i < listOfImages.length; i++) {
 		let imageFileDivObj = new imageFileDiv(listOfImages[i], i);
 		imageArray.push(imageFileDivObj);
+
 		// Create image file divs
 		let imageFile = document.createElement("div");
 		imageFile.classList.toggle("image-file");
 		imageFileSection.appendChild(imageFile);
 		imageFile.textContent = listOfImages[i];
-
-		let textAreaArray = [];
-
 		imageFileDivObj.createTextBoxWrapper();
-		let textAreas = Array.from(document.querySelectorAll(".textbox"));
-		// todo - create saveTextAreaContent
 
 		imageFile.addEventListener("click", () => {
 			let textBoxes = Array.from(document.querySelectorAll(".textbox-wrapper"));
@@ -45,6 +54,39 @@ getFolderButton.addEventListener("click", async () => {
 			imageFileDivObj.showTextbox();
 		});
 	}
+	// Save name of file and its text area
+	imageArray.forEach(img => {
+		saveTextAreaContent(img.name, img.textBox.value);
+	});
+	// Get all text areas
+	let textAreas = Array.from(document.querySelectorAll(".textbox"));
+	// Update text area array in real time upon user input
+	textAreas.forEach(area => {
+		area.addEventListener("input", () => {
+			textAreaArray = [];
+			imageArray.forEach(img => {
+				saveTextAreaContent(img.name, img.textBox.value);
+			});
+		});
+	});
+}
+
+// TODO - send textAreaArray to a database table after choosing folder
+
+// Send choice to main process to get path
+getFolderButton.addEventListener("click", async () => {	
+	const listOfImages = await window.api.selectFolder();
+
+	clearDisplayArea();
+
+	// Get path from first index
+	let folderPath = listOfImages.shift();
+	updatePath(folderPath);
+
+	numberOfImages.textContent = listOfImages.length + " Images";
+
+	// Create image file sections for each element
+	createImageFileSections(listOfImages);
 });
 
 class imageFileDiv {
@@ -102,9 +144,5 @@ class imageFileDiv {
 			textBoxTitle.textContent = "";
 			textBoxTitle.textContent = this.name;
 		}
-	}
-
-	saveTextAreaContent() {
-
 	}
 }
