@@ -146,6 +146,7 @@ button:active {
 	font-size: 18px;
 	font-family: Helvetica, Arial, sans-serif;
 	height: 100%;
+	width: 75%;
 	margin-left: 5px;
 }
 
