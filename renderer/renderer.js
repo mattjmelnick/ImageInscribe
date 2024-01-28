@@ -35,6 +35,7 @@ function updateTextAreaArray() {
 
 // Create image file div sections
 function createImageFileSections(listOfImages) {
+	let currentIndex = 0;
 	for (let i = 0; i < listOfImages.length; i++) {
 		let imageFileDivObj = new imageFileDiv(listOfImages[i], i);
 		imageArray.push(imageFileDivObj);
@@ -47,6 +48,7 @@ function createImageFileSections(listOfImages) {
 		imageFileDivObj.createTextBoxWrapper();
 
 		imageFile.addEventListener("click", () => {
+			currentIndex = imageFileDivObj.index;
 			let textBoxes = Array.from(document.querySelectorAll(".textbox-wrapper"));
 			textBoxes.forEach(box => {
 				box.style.display = "none";
@@ -69,12 +71,36 @@ function createImageFileSections(listOfImages) {
 			});
 		});
 	});
+
+	let prevButtons = Array.from(document.querySelectorAll(".up-button"));
+	let nextButtons = Array.from(document.querySelectorAll(".down-button"));
+
+	prevButtons.forEach(btn => {
+		btn.addEventListener("click", () => {
+			currentIndex = (currentIndex - 1 + imageArray.length) % imageArray.length;
+			showImageFile(currentIndex);
+		});
+	});
+	nextButtons.forEach(btn => {
+		btn.addEventListener("click", () => {
+			currentIndex = (currentIndex + 1) % imageArray.length;
+			showImageFile(currentIndex);
+		});
+	});
+
+	function showImageFile(index) {
+		let textBoxes = Array.from(document.querySelectorAll(".textbox-wrapper"));
+		textBoxes.forEach(box => {
+			box.style.display = "none";
+		});
+		imageArray[index].showTextbox();
+	}
 }
 
 // TODO - send textAreaArray to a database table after choosing folder
 
 // Send choice to main process to get path
-getFolderButton.addEventListener("click", async () => {	
+getFolderButton.addEventListener("click", async () => {
 	const listOfImages = await window.api.selectFolder();
 
 	clearDisplayArea();
@@ -134,6 +160,9 @@ class imageFileDiv {
 		});
 
 		upButton.textContent = '^';
+		upButton.addEventListener("click", () => {
+			
+		});
 		downButton.textContent = 'v';
 	}
 
