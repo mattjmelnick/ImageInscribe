@@ -98,6 +98,14 @@ button:active {
 	padding-left: 5px;
 }
 
+.image-file:hover {
+	background-color: rgb(232, 232, 163);
+}
+
+.image-file:active {
+	background-color: rgb(221, 221, 161);
+}
+
 .textbox-wrapper {
 	display: none;
 	box-sizing: border-box;
